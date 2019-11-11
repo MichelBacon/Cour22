@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TeamManager : MonoBehaviour {
+public class TeamManager : NetworkBehaviour {
   
+    [SyncVar(hook = "OnChangeTeam")]
     private Team team;
     public GameObject playerBody;
   
@@ -30,5 +31,11 @@ public class TeamManager : MonoBehaviour {
             playerBody.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }
     }
-   
+
+    void OnChangeTeam(Team newTeam)
+    {
+        AssignTeam(newTeam);
+    }
+
+
 }
